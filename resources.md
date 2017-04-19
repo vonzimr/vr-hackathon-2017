@@ -19,14 +19,11 @@ scratch for our project. More info: https://docs.npmjs.com/cli/install
 ## Using angle
 Angle resources: https://www.npmjs.com/package/angle 
 To start with a blank project, run `angle initscene`, then inside the newly
-created angle project run ``npm run start``
+created angle project run ``npm run start`` to launch a server
 
 TODO: figure out what it means when it asks for tracked controls with hand
 models.
 
-## Running a server
-
-I'm going to use npm,
 
 
 ## Remote Debugging in Firefox
