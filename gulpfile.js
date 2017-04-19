@@ -3,6 +3,10 @@ var sass = require('gulp-sass')
 var nunjucksRender = require('gulp-nunjucks-render')
 var browserSync = require('browser-sync').create();
 
+
+
+var inputPages     = 'app/pages/**/*.+(html|nunjucks|njk)';
+var inputTemplates = 'app/templates/**/*.+(html|nunjucks|njk)';
 /**
  * SASS TO CSS TASK
  *
@@ -19,7 +23,7 @@ gulp.task('sass', function(){
 
 gulp.task('nunjucks', function(){
   //gets .html, .njk, .nunjuks files in pages
-  return gulp.src('app/pages/**/*.+(html|nunjucks|njk)')
+  return gulp.src(inputPages)
   .pipe(nunjucksRender({
     path: ['app/templates']
   }))
@@ -39,7 +43,6 @@ gulp.task('watch', ['browserSync'], function (){
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('app/*.html', browserSync.reload);
   gulp.watch('app/js/**/*.js', browserSync.reload);
-  gulp.watch('app/templates/**/*.+(html|nunjucks|njk)', browserSync.reload);
-  gulp.watch('app/pages/**/*.+(html|nunjucks|njk)', browserSync.reload);
+  gulp.watch([inputPages, inputTemplates], ['nunjucks']);
   //other watchers
 })
