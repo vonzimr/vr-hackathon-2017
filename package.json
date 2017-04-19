@@ -1,0 +1,23 @@
+{
+  "name": "vr-hackathon-2017",
+  "version": "1.0.0",
+  "description": "VR Hackathon Resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vonzimr/vr-hackathon-2017.git"
+  },
+  "keywords": [
+    "vr",
+    "aframe"
+  ],
+  "author": "Robert Von Zimmerman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vonzimr/vr-hackathon-2017/issues"
+  },
+  "homepage": "https://github.com/vonzimr/vr-hackathon-2017#readme"
+}
