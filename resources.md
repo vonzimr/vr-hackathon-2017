@@ -16,7 +16,7 @@ Where:
 TODO: create a package.json for npm so we can just install everything from
 scratch for our project. More info: https://docs.npmjs.com/cli/install
 
-##Using angle
+## Using angle
 Angle resources: https://www.npmjs.com/package/angle 
 To start with a blank project, run `angle initscene`, then inside the newly
 created angle project run ``npm run start``
