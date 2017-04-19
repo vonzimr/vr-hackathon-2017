@@ -1,19 +1,5 @@
-<!-- layout.njk -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>aframe-boilerplate</title>
-    <meta name="description" content="aframe-boilerplate">
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
-  </head>
-  <body>
-  <a-scene>
-    <a-assets>
-    <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
-    <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
-  </a-assets>
-
+<a-scene>
+  {% include "assets.njk" %}
   <!-- Primitives. -->
   <a-box position="-1 0.6 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
   <a-sphere position="0 1.35 -5" radius="1.25" color="#EF2D5E"></a-sphere>
@@ -27,6 +13,3 @@
   <a-circle src="#groundTexture" rotation="-90 0 0" radius="32"></a-circle>
 
 </a-scene>
-
-  </body>
-</html>

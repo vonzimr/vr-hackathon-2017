@@ -4,7 +4,8 @@
   "description": "VR Hackathon Resources",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server --port=7000",
+    "deploy": "ghpages"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/vonzimr/vr-hackathon-2017/issues"
   },
-  "homepage": "https://github.com/vonzimr/vr-hackathon-2017#readme"
+  "homepage": "https://github.com/vonzimr/vr-hackathon-2017#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "gulp-nunjucks": "^3.0.0",
+    "gulp-nunjucks-render": "^2.2.1",
+    "gulp-sass": "^3.1.0"
+    "ghpages": "0.0.3",
+    "live-server": "^1.2.0"
+  }
 }
