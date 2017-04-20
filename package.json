@@ -23,10 +23,12 @@
   "homepage": "https://github.com/vonzimr/vr-hackathon-2017#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "ghpages": "0.0.3",
+    "gulp-browserify": "^0.5.1",
     "gulp-nunjucks": "^3.0.0",
     "gulp-nunjucks-render": "^2.2.1",
-    "gulp-sass": "^3.1.0"
-    "ghpages": "0.0.3",
-    "live-server": "^1.2.0"
+    "gulp-sass": "^3.1.0",
+    "live-server": "^1.2.0",
+    "webpack-stream": "^3.2.0"
   }
 }
