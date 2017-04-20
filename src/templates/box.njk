@@ -1,9 +1,5 @@
 <a-box position="0 2 -10"
-  color="#F55" radius="0.1"
-  animation="property: color; dir: alternate; dur: 1000;
-  easing: easeInSine; loop: true; to: #5F5"
-  animation__scale="property: scale; dir: alternate; dur: 200;
-  easing: easeInSine; loop: true; to: 1.2 1 1.2"
-  animation__yoyo="property: position; dir: alternate; dur: 1000;
-  easing: easeInSine; loop: true; to: 0 2 0">
+    color="#F55">
+    <a-animation attribute="scale" begin="mouseenter" dur="300" to="2.3 2.3 2.3"></a-animation>
+    <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
 </a-box>
