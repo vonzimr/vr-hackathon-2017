@@ -1,6 +1,16 @@
 <a-scene>
   {% include "assets.njk" %}
-  <a-box color="red" position="0 1.5 -5" rotation="0 90 45" scale="1 2 2"></a-box> 
+  
+  <a-entity camera look-controls wasd-controls>
+    <a-entity cursor="fuse:true; fuseTimeout: 500"
+      position="0 0 -1"
+      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+      material="color: black; shader:flat">
+    </a-entity>
+  </a-entity>
+
+  <a-box scale-on-mouseenter="to:5 5 5" 
+  color="blue" position="0 1.5 -5" rotation="0 90 45" scale="1 2 2"></a-box> 
   <a-sky src="#skyTexture"></a-sky>
   <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30"
     repeat="2 2"></a-plane>
