@@ -1,16 +1,9 @@
-<a-box 
-  scale-on-mouseenter="to:5 5 5" 
-  color="red"
-  position="0 1.5 -5"
-  rotation="0 90 45"
-  scale="1 2 2">
-
-  <a-animation 
-    attribute="position"
-    to="0 2.2 -5"
-    direction="alternate"
-    dur="2000"
-    repeat="indefinite">
-  </a-animation>
-
-</a-box> 
+<a-box position="0 2 -10"
+  color="#F55" radius="0.1"
+  animation="property: color; dir: alternate; dur: 1000;
+  easing: easeInSine; loop: true; to: #5F5"
+  animation__scale="property: scale; dir: alternate; dur: 200;
+  easing: easeInSine; loop: true; to: 1.2 1 1.2"
+  animation__yoyo="property: position; dir: alternate; dur: 1000;
+  easing: easeInSine; loop: true; to: 0 2 0">
+</a-box>
