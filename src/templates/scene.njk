@@ -1,11 +1,11 @@
 <a-scene>
   {% include "assets.njk" %}
-  
+
   <a-camera>
       <a-cursor></a-cursor>
   </a-camera>
-  
-  <a-cylinder color="red" height="5" radius="1.5" position="1 1 1"></a-cylinder>
+
+  <a-cylinder color="red" height="2.5" radius="0.25" position="1 0 -6"></a-cylinder>
   <a-box position="0 2 -10"
       color="#F55" follow="target:a-entity#cone; speed:.1"></a-box>
   <a-sky src="#skyTexture"></a-sky>
