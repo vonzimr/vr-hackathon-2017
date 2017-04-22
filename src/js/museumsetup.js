@@ -10,6 +10,7 @@ AFRAME.registerComponent('museumsetup', {
       cylinderEntity.setAttribute('color', 'red');
       cylinderEntity.setAttribute('height', 2.5);
       cylinderEntity.setAttribute('radius', 0.25);
+      cylinderEntity.setAttribute('segmentsRadial', 8);//not working for some reason?
       scene.appendChild(cylinderEntity);
       cylinder_z -= 3;
     }
