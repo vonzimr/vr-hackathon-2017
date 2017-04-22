@@ -41,6 +41,7 @@
   "dependencies": {
     "aframe": "^0.5.0",
     "aframe-animation-component": "^3.2.5",
+    "aframe-keyboard-controls": "^1.3.0",
     "body-parser": "^1.17.1",
     "bufferutil": "^3.0.0",
     "cookie-parser": "^1.4.3",

@@ -1,12 +1,13 @@
 <a-scene>
     <a-assets></a-assets> 
-  <a-camera position="0 2 -10" socket-send-position="event:player-pos">
+  <a-camera follow="target:a-box#curator;speed:1">
       <a-cursor></a-cursor>
   </a-camera>
   
   <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
   </a-cylinder>
-  <a-box position="0 2 -10" color="#F55"></a-box>
+  <a-box id="curator" position="0 2 -10" color="#F55"
+      socket-receive-position="event:player-pos"></a-box>
   <a-entity position="2 1 -1">
       <a-entity id="cone" geometry="primitive:cone"
           animation="property:position; dir:alternate; dur:1000;

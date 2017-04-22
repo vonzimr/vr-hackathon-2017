@@ -16,13 +16,27 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  var client_id = socket.id;
+
+  console.log('a user connected: ' + socket.id);
+
+  socket.broadcast.to(client_id).emit('id', client_id);
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
 
   socket.on('box click', function(x){
       console.log("You clicked the box!");
+  });
+  socket.on('player-pos', function(pos){
+      console.log(pos, socket.id);
+      socket.broadcast.emit('player-pos', pos);
+  });
+
+  socket.on('player-rot', function(rot){
+      console.log(rot, socket.id);
+      socket.broadcast.emit('player-rot', rot);
   });
 });
 
