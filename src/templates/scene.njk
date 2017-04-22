@@ -1,15 +1,24 @@
-<a-scene>
-    <a-assets></a-assets> 
-  <a-camera position="0 2 -10" socket-send-position="event:player-pos">
-      <a-cursor></a-cursor>
-  </a-camera>
-  
-  <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
-  </a-cylinder>
-  <a-box position="0 2 -10" color="#F55"></a-box>
-  <a-entity position="2 1 -1">
-      <a-entity id="cone" geometry="primitive:cone"
-          animation="property:position; dir:alternate; dur:1000;
-          easing:easeInSine; loop:true; to: 0 2 0"> </a-entity>
-  </a-entity>
+<a-scene museumsetup = "test!">
+    {% include "assets.njk" %}
+    <a-camera position="0 2 -10" socket-send-position="event:player-pos">
+        <a-cursor></a-cursor>
+    </a-camera>
+
+    <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
+    </a-cylinder>
+    <a-box position="0 2 -10" color="#F55"></a-box>
+
+    <a-camera>
+        <a-cursor></a-cursor>
+    </a-camera>
+
+    <a-box position="0 2 -10"
+        color="#F55" follow="target:a-entity#cone; speed:.1"></a-box>
+    <a-sky src="#skyTexture"></a-sky>
+    <a-plane src="#groundTexture" width="100" height="100" rotation="-90 0 0"></a-plane>
+    <a-entity position="2 1 -1">
+        <a-entity id="cone" geometry="primitive:cone"
+            animation="property:position; dir:alternate; dur:1000;
+            easing:easeInSine; loop:true; to: 0 2 0"> </a-entity>
+    </a-entity>
 </a-scene>
