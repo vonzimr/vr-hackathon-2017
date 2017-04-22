@@ -1,7 +1,7 @@
 AFRAME.registerComponent('museumsetup', {
   schema: {type: 'string'},
   init: function () {
-    var cylinder_z = -8
+    var cylinder_z = -6
     scene = document.querySelector('a-scene');
 
     function addArt() {
@@ -15,7 +15,7 @@ AFRAME.registerComponent('museumsetup', {
     }
 
     document.querySelector('a-assets');
-    a = document.querySelectorAll('img');
+    a = document.querySelectorAll('img');//placeholder tag
     a.forEach(function(x) {addArt();});
   }
 });
