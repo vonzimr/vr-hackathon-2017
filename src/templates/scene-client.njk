@@ -1,0 +1,9 @@
+{% extends "scene-common.njk" %}
+{% block scene %}
+<a-camera follow="target:a-box#curator;speed:1">
+    <a-cursor></a-cursor>
+</a-camera>
+
+<a-box id="curator" position="0 2 -10" color="#F55"
+    socket-receive-position="event:player-pos"></a-box>
+{% endblock %}

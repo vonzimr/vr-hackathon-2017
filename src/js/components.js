@@ -1,3 +1,6 @@
+var server = "http://192.168.1.3:3002";
+socket = require('socket.io-client')(server); 
+
 AFRAME.registerComponent('follow', {
   schema: {
     target: {type: 'selector'},
@@ -16,7 +19,7 @@ AFRAME.registerComponent('follow', {
     // Calculate the distance.
     var distance = directionVec3.length();
     // Don't go any closer if a close proximity has been reached.
-    if (distance < 1) { return; }
+    if (distance < 5) { return; }
     // Scale the direction vector's magnitude down to match the speed.
     var factor = this.data.speed / distance;
     ['x', 'y', 'z'].forEach(function (axis) {
@@ -29,4 +32,64 @@ AFRAME.registerComponent('follow', {
       z: currentPosition.z + directionVec3.z
     });
   }
+});
+
+AFRAME.registerComponent('do-something-on-head-movement', {
+  init: function () {
+    var scene = this.el;
+    var camera = scene.cameraEl;
+
+    camera.addEventListener('componentchanged', function (evt) {
+      if (evt.detail.name === 'rotation' || evt.detail.name === 'position') {
+        // Do something.
+      }
+
+    });
+  }
+});
+
+AFRAME.registerComponent('socket-send-position', {
+    init: function () {
+        var scene = this.el;
+        var data = this.data;
+        var el = this.el;
+        this.el.addEventListener('componentchanged', function (evt) {
+            if (evt.detail.name === 'position') {
+                socket.emit('player-pos', el.object3D.position);
+            }
+
+            if (evt.detail.name === 'rotation') {
+                socket.emit('player-rot', el.object3D.rotation);
+            }
+        });
+    }
+});
+
+AFRAME.registerComponent('socket-receive-position', {
+    schema:{
+        event:{default: ""}
+    },
+    init:function(){
+        this.timeStep = .5;
+        this.acc = 0 
+        var el = this.el;
+        socket.on('player-pos', function(pos){
+            el.setAttribute('position', {
+                x: pos.x,
+                y: pos.y,
+                z: pos.z
+            });
+        });
+
+
+        socket.on('player-rot', function(rot){
+            console.log(rot);
+            el.setAttribute('rotation', {
+                x: rot._x,
+                y: rot._y,
+                z: rot._z
+            });
+        });
+
+    }
 });
