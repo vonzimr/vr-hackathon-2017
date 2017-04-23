@@ -20,7 +20,7 @@ def BlendtoObj():
             Blendout, Blendext = os.path.splitext(Blendfile)
             os.chdir('../dist/assets') 
             full_path = os.path.abspath(os.getcwd())
-            BlendfilePath = full_path + Blendfile
+            BlendfilePath = full_path + "/"+ Blendfile
             BlendoutPath = full_path + "/" + Blendout + '.obj'
                 
             os.chdir('../../src/')
