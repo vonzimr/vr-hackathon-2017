@@ -29,8 +29,14 @@ def BlendtoObj(Blendfile):
 
 def AssetScrape():
     #Loop through this 5 or so times?
-    loopInt = 0
-    while loopInt < 4:
+    argv = sys.argv
+    if argv == 1:
+        loopInt = 1
+    elif argv == 2:
+        loopInt = 2
+    else:
+        loopInt = (loopInt - 1) * 4
+    while loopInt < (4 * loopInt):
         pageNum = random.randint(0, 103)
         address = ""
         if pageNum == 0:
