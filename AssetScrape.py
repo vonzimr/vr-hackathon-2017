@@ -96,8 +96,8 @@ def AssetScrape():
                 if retval == 0:
                     print "Downloaded Model " + str(loopInt) + "!"
                     text = open(root_dir + '/dist/assets/' + str(loopInt) + '.txt', 'w') #File is title, author, date
-                    text.write(unicode(title[0], "utf-8") + '\n')
-                    text.write(unicode(author[0], "utf-8") + '\n')
+                    text.write(unicode(title[0], "utf-8") + ',')
+                    text.write(unicode(author[0], "utf-8") + ',')
                     text.write(unicode(date[0], "utf-8"))
                     text.close()
                     loopInt = loopInt + 1
