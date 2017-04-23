@@ -1,5 +1,3 @@
-require('bufferutil');
-var nunjucks  = require('nunjucks');
 
 var express = require('express');
 var app = express();
@@ -7,6 +5,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require("path");
 var fs = require('fs');
+var nunjucks = require('nunjucks');
+var exec = require("child_process").exec;
+var cur_model = 0;
 
 //configure nunjucks
 nunjucks.configure(__dirname + '/src/templates', {
@@ -19,22 +20,38 @@ app.use(require('connect-livereload')({
 }));
 app.use(express.static('dist'));
 app.set('view engine', 'nunjucks');
-app.get('/index', function(req, res){
+app.get('/curator', function(req, res){
     res.render(path.normalize(__dirname + "/src/templates/scene-curator.njk"));
 });
 
-app.get('/swap', function(req, res){
+app.get('/client', function(req, res){
     res.render(path.normalize(__dirname + "/src/templates/scene-client.njk"));
 });
 
+function get_new_objects(){
+    var new_models = exec('python2 ./AssetScrape.py', function(error, stdout, stderr){
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
 
-fs.readdir(__dirname + "/dist/assets", function(err, assets){
-    assets.forEach(function(asset){
-        var ft = asset.split('.');
-        console.log(ft[1]);
+        var obj = [];
+        fs.readdir(__dirname + "/dist/assets", function(err, assets){
+            assets.forEach(function(asset){
+                var ext = asset.split('.')[1];
+                if(ext == 'obj'){
+                    console.log(asset);
+                    obj.push(asset);
+                }
+            });
+        });
     });
-});
 
+}
+
+console.log(get_new_objects());
 io.on('connection', function(socket){
   var client_id = socket.id;
 
