@@ -1,10 +1,13 @@
-<a-scene museumsetup = "test!">
-    {% include "assets.njk" %}
+{% extends "layout.njk" %}
+
+{% block scene %}
+    
 
     <a-camera position="0 2 -10" socket-send-position="event:player-pos">
         <a-cursor></a-cursor>
     </a-camera>
-    {% block scene %} {% endblock %}
+    {% block hm %} 
+    {% endblock %}
     <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
     </a-cylinder>
     <a-box position="0 2 -10" color="#F55"></a-box>
@@ -18,4 +21,5 @@
             animation="property:position; dir:alternate; dur:1000;
             easing:easeInSine; loop:true; to: 0 2 0"> </a-entity>
     </a-entity>
-</a-scene>
+
+{% endblock %}

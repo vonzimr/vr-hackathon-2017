@@ -8,6 +8,9 @@
     <script src="js/bundle.js"></script>
   </head>
   <body>
-  {% include "scene.njk" %}
+  <a-scene museumsetup = "test!">
+      {% block scene %}
+      {% endblock %}
+      </a-scene>
   </body>
 </html>

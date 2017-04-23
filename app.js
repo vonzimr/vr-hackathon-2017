@@ -1,18 +1,38 @@
 require('bufferutil');
+var nunjucks  = require('nunjucks');
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require("path");
+var fs = require('fs');
 
+//configure nunjucks
+nunjucks.configure(__dirname + '/src/templates', {
+  autoescape: true,
+  express   : app
+});
 //for the live reload mechanism (see gulpfile)
 app.use(require('connect-livereload')({
     port: 35729
 }));
 app.use(express.static('dist'));
+app.set('view engine', 'nunjucks');
+app.get('/index', function(req, res){
+    res.render(path.normalize(__dirname + "/src/templates/scene-curator.njk"));
+});
 
-app.get('/', function(req, res){
-    res.sendFile(path.normalize(__dirname + "/dist/index.html"));
+app.get('/swap', function(req, res){
+    res.render(path.normalize(__dirname + "/src/templates/scene-client.njk"));
+});
+
+
+fs.readdir(__dirname + "/dist/assets", function(err, assets){
+    assets.forEach(function(asset){
+        var ft = asset.split('.');
+        console.log(ft[1]);
+    });
 });
 
 io.on('connection', function(socket){
