@@ -1,5 +1,5 @@
 var server = "http://192.168.1.3:3002";
-socket = require('socket.io-client')(server); 
+socket = require('socket.io-client')(server);
 
 AFRAME.registerComponent('follow', {
   schema: {
@@ -51,10 +51,25 @@ AFRAME.registerComponent('check-distance', {
     var distance = directionVec3.length();
     if (distance < 5) {
         socket.emit('switch room', null);
+        if (currentPosition.x > 45){
         this.data.target.setAttribute('position', {
-            x: 0,
+            x: -80,
             y: 2,
             z: -10});
+          }
+          else if (currentPosition.x < -70){
+          this.data.target.setAttribute('position', {
+              x: -80,
+              y: 2,
+              z: -10});
+            }
+          else if (currentPosition.z > 60){
+            this.data.target.setAttribute('position', {
+                x: -15,
+                y: 2,
+                z: -70});
+          }
+          
     }
 
   }
@@ -97,7 +112,7 @@ AFRAME.registerComponent('socket-receive-position', {
     },
     init:function(){
         this.timeStep = .5;
-        this.acc = 0 
+        this.acc = 0
         var el = this.el;
         socket.on('player-pos', function(pos){
             el.setAttribute('position', {
