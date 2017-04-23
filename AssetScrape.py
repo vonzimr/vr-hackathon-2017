@@ -12,7 +12,7 @@ import sys
 import requests
 from lxml import html
 import subprocess
-root_dir = "."
+root_dir = os.path.dirname(os.path.abspath(__file__))
 def BlendtoObj(Blendfile):
     if Blendfile.endswith(".blend"):
         Blendout, Blendext = os.path.splitext(Blendfile)
