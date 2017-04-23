@@ -9,8 +9,11 @@
   </head>
   <body>
   <a-scene museumsetup = "test!">
-      {% block scene %}
-      {% endblock %}
+          {% include "assets.njk" %}
+
+          {% block scene %}
+          {% endblock %}
+
       </a-scene>
   </body>
 </html>
