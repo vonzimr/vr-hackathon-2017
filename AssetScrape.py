@@ -42,7 +42,7 @@ def AssetScrape():
     else:
         loopInt = 0
         loopEnd = 4
-    while loopInt < (LoopEnd):
+    while loopInt < (loopEnd):
         print str(loopInt)
         pageNum = random.randint(0, 103)
         address = ""
