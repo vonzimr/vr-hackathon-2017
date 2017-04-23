@@ -13,28 +13,24 @@ import requests
 from lxml import html
 import subprocess
 
-def BlendtoObj():
-    count = 0
-    for Blendfile in os.listdir("../dist/assets/"):
-        if Blendfile.endswith(".blend"):
-            Blendout, Blendext = os.path.splitext(Blendfile)
-            os.chdir('../dist/assets') 
-            full_path = os.path.abspath(os.getcwd())
-            BlendfilePath = full_path + "/"+ Blendfile
-            BlendoutPath = full_path + "/" + Blendout + '.obj'
-                
-            os.chdir('../../src/')
-            subprocess.call(['blender', '--background', BlendfilePath, '-P',
-                'BlendtoObj.py', '--', BlendoutPath])
-            #os.system('blender ', BlendfilePath', --background --python + BlendtoObj.py ' + BlendoutPath)
-            print "Converted " + str(count)
-            count = count + 1
-        
+def BlendtoObj(Blendfile):
+    if Blendfile.endswith(".blend"):
+        Blendout, Blendext = os.path.splitext(Blendfile)
+        os.chdir('../dist/assets') 
+        full_path = os.path.abspath(os.getcwd())
+        BlendfilePath = full_path + "/"+ Blendfile
+        BlendoutPath = full_path + "/" + Blendout + '.obj'
+
+        os.chdir('../../src/')
+        subprocess.call(['blender', '--background', BlendfilePath, '-P',
+            'BlendtoObj.py', '--', BlendoutPath])
+        #os.system('blender ', BlendfilePath', --background --python + BlendtoObj.py ' + BlendoutPath)
+
 
 def AssetScrape():
     #Loop through this 5 or so times?
     loopInt = 0
-    while loopInt <= 8:
+    while loopInt < 4:
         pageNum = random.randint(0, 103)
         address = ""
         if pageNum == 0:
@@ -73,16 +69,20 @@ def AssetScrape():
             filename, file_ext = os.path.splitext(i)
             if file_ext == ".blend":
                 modelResponse = requests.get(i, stream=True)
-                with open('../dist/assets/' + str(loopInt) + '.blend', 'wb') as fd:
+
+                blend_file = str(loopInt) + '.blend'
+                with open('../dist/assets/' + blend_file, 'wb') as fd:
                     for chunk in modelResponse.iter_content(2000): #2000 bytes per chunk
                         fd.write(chunk)
                 fd.close()
-                        
+                
+                print  blend_file
+                BlendtoObj(blend_file)
                 print "Downloaded Model " + str(loopInt) + "!"
                 text = open('../dist/assets/' + str(loopInt) + '.txt', 'w') #File is title, author, date
-                text.write(title[0] + '\n')
-                text.write(author[0] + '\n')
-                text.write(date[0])
+                text.write(unicode(title[0], "utf-8") + '\n')
+                text.write(unicode(author[0], "utf-8") + '\n')
+                text.write(unicode(date[0], "utf-8"))
                 text.close()
                 loopInt = loopInt + 1
                 break
@@ -96,7 +96,6 @@ def AssetScrape():
 #                print "Downloaded zip!"
 #                zip_file = zipfile.Zipfile('../dist/assets/' + os.path.basename(i), 'r')
 #                zip_file.extract
-    BlendtoObj()
     
     
 AssetScrape()
