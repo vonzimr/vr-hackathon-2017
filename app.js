@@ -51,7 +51,6 @@ function get_new_objects(){
 
 }
 
-console.log(get_new_objects());
 io.on('connection', function(socket){
   var client_id = socket.id;
 

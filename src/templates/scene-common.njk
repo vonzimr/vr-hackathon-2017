@@ -3,7 +3,10 @@
 {% block scene %}
     
 
-    {% block observer%} 
+    <a-camera position="0 2 -10" socket-send-position="event:player-pos">
+        <a-cursor></a-cursor>
+    </a-camera>
+    {% block hm %} 
     {% endblock %}
     <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
     </a-cylinder>
