@@ -18,8 +18,8 @@ def BlendtoObj(Blendfile):
         Blendout, Blendext = os.path.splitext(Blendfile)
         os.chdir(root_dir + '/dist/')
         full_path = os.path.abspath(os.getcwd())
-        BlendfilePath = full_path + "/"+ Blendfile
-        BlendoutPath = full_path + "/" + Blendout + '.obj'
+        BlendfilePath = full_path + "/assets"+ Blendfile
+        BlendoutPath = full_path + "/assets" + Blendout + '.obj'
 
         os.chdir(root_dir + '/src/')
         retval = subprocess.call(['blender', '--background', BlendfilePath, '-P',
