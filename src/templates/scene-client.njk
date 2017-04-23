@@ -1,6 +1,10 @@
 {% extends "scene-common.njk" %}
 {% block observer %}
-<a-camera follow="target:a-box#curator;speed:1">
+    <a-camera follow="target:a-box#curator;speed:1">
+<a-entity
+  geometry="primitive: plane; width: 4; height: auto"
+  material="color: blue"
+  text="value: This text will be 4 units wide."></a-entity>
     <a-cursor></a-cursor>
 </a-camera>
 

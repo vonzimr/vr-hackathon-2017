@@ -3,14 +3,15 @@
 {% block scene %}
 
 
-    <a-camera position="0 2 -10" socket-send-position="event:player-pos">
-    <a-cursor></a-cursor>
-</a-camera>
 {% block hm %} 
 {% endblock %}
 <a-cylinder color="red" height="5" radius="1.5" position="1 1 1">
 </a-cylinder>
 
+<a-entity
+  geometry="primitive: plane; width: 4; height: auto"
+  material="color: blue"
+  text="value: This text will be 4 units wide."></a-entity>
 <a-plane check-distance="target:a-camera;distance:1;newPos: 0 2 -10"
     material="side:double;color:#ff0000;normalScale:{&quot;x&quot;:null}"
 geometry="mergeTo:null;primitive:plane" position="10 1 1"></a-plane>

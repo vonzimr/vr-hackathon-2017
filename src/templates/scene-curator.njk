@@ -1,7 +1,14 @@
 {% extends "scene-common.njk" %}
 
 {% block observer %}
+    <a-entity>
     <a-camera position="0 2 -10" socket-send-position="event:player-pos">
-    <a-cursor></a-cursor>
-</a-camera>
+        <a-cursor></a-cursor>
+        <a-entity position="1 1 1"
+            geometry="primitive: plane; width: 4; height: auto"
+            material="color: blue"
+            text="value: This text will be 4 units wide."></a-entity>
+
+    </a-camera>
+</a-entity>
 {% endblock %}

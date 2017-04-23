@@ -1,10 +1,10 @@
 AFRAME.registerComponent('museumsetup', {
   schema: {type: 'string'},
   init: function () {
-    var cylinder_z = -6
+    var cylinder_z = 0 ;
     scene = document.querySelector('a-scene');
 
-    function addArt(node, int) {
+    function addArt(node) {
       cylinderEntity = document.createElement('a-cylinder');
       cylinderEntity.setAttribute('position', {x: 1, y: 0, z: cylinder_z});
       cylinderEntity.setAttribute('color', 'red');
