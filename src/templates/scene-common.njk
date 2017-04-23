@@ -3,12 +3,13 @@
 {% block scene %}
 
 
-    <a-camera position="0 2 -10" socket-send-position="event:player-pos">
-    <a-cursor></a-cursor>
-</a-camera>
-{% block hm %}
+{% block hm %} 
 {% endblock %}
 
+<a-entity
+  geometry="primitive: plane; width: 4; height: auto"
+  material="color: blue"
+  text="value: This text will be 4 units wide."></a-entity>
 <a-plane check-distance="target:a-camera;distance:1;newPos: 0 2 -10"
     material="side:double;visible:false;normalScale:{&quot;x&quot;:null}"
 geometry="mergeTo:null;primitive:plane" position="55 2 -8" rotation="0 90 0" scale='30'></a-plane>

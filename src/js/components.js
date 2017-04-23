@@ -34,6 +34,34 @@ AFRAME.registerComponent('follow', {
   }
 });
 
+AFRAME.registerComponent('plaque', {
+    schema:{
+        file: {type: 'array'}
+        target: {type: 'target'}
+    },
+   init: function(){
+      var textel = this.target; 
+      textel.setAttribute("font","mozillavr");
+      textel.setATtribute("value", array[0]);
+
+
+   }
+
+   update: function(oldData){
+
+   }
+}
+
+AFRAME.registerComponent('collider-check', {
+  dependencies: ['raycaster'],
+  init: function () {
+    this.el.addEventListener('raycaster-intersected', function () {
+      console.log('Player hit something!');
+    });
+  }
+});
+   
+
 
 AFRAME.registerComponent('check-distance', {
   schema: {
