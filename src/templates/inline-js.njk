@@ -22,13 +22,6 @@ function addArt(node) {
 }
 
 
-document.querySelector('a-assets');
-a = document.querySelectorAll('a-asset-item');
-a.forEach(function(x, y) {if ((y % 2) === 1){
-    return;
-}
-addArt(x);
-});
-
-
+a = document.querySelectorAll('a-asset-item.downloaded');
+a.forEach(function(x) {addArt(x);});
 </script>
