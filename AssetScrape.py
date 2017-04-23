@@ -30,6 +30,7 @@ def BlendtoObj(Blendfile):
 def AssetScrape():
     #Loop through this 5 or so times?
     argv = sys.argv
+    loopInt = 0
     if argv == 1:
         loopInt = 1
     elif argv == 2:
