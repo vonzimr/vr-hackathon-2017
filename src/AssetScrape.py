@@ -11,12 +11,26 @@ import zipfile
 import sys
 import requests
 from lxml import html
+import subprocess
+
+def BlendtoObj():
+    count = 0
+    for Blendfile in os.listdir("../dist/assets/"):
+        if Blendfile.endswith(".blend"):
+            Blendout, Blendext = os.path.splitext(Blendfile)
+            BlendfilePath = "../dist/assets/" + Blendfile
+            BlendoutPath = "../dist/assets/" + Blendout + '.obj'
+            subprocess.check_output(['blender', '-b', BlendfilePath, '-P', 'BlendtoObj.py', '--', BlendoutPath], shell = True)
+            #os.system('blender ' + BlendfilePath + ' --background --python + BlendtoObj.py ' + BlendoutPath)
+            print "Converted " + str(count)
+            count = count + 1
+        
 
 def AssetScrape():
     #Loop through this 5 or so times?
     loopInt = 0
     while loopInt <= 4:
-        pageNum = random.randint(0, 104)
+        pageNum = random.randint(0, 103)
         address = ""
         if pageNum == 0:
             address = "https://opengameart.org/art-search-advanced?keys=&field_art_type_tid%5B%5D=10&sort_by=count&sort_order=DESC"
@@ -27,38 +41,40 @@ def AssetScrape():
         tree = html.fromstring(page.content)
     
         Assets = tree.xpath('//span[@class="art-preview-title"]/a/@href')
-        print Assets
+        #print Assets
         AssetPage = random.choice(Assets)
         AssetPage = "https://opengameart.org" + AssetPage
         
-        print AssetPage
+        #print AssetPage
     
         page = requests.get(AssetPage)
         tree = html.fromstring(page.content)
         
         author = tree.xpath('//span[@class="username"]/a/text()')
+        if author == []:
+            author = tree.xpath('//span[@class="username"]/text()')
         date = tree.xpath('//div[@class="group-left left-column"]//div[@class="field field-name-post-date field-type-ds field-label-hidden"]//div[@class="field-item even"]/text()')
         title = tree.xpath('//div[@property="dc:title"]/h2/text()')
         model = tree.xpath('//span[@class="file"]/a/@href') #Still array of downloads! Look for blend or zip
-        print author[0]
-        print date[0]
-        print title[0]
-        print model 
+        #print author[0]
+        #print date[0]
+        #print title[0]
+        #print model 
         #filename, file_ext = os.path.splitext(model[0])
         #print '../dist/assets/' + os.path.basename(model[0])
         
-        chunknum = 0
+
         for i in model:
             filename, file_ext = os.path.splitext(i)
             if file_ext == ".blend":
                 modelResponse = requests.get(i, stream=True)
-                with open('../dist/assets/' + os.path.basename(i), 'wb') as fd:
+                with open('../dist/assets/' + str(loopInt) + '.blend', 'wb') as fd:
                     for chunk in modelResponse.iter_content(2000): #2000 bytes per chunk
                         fd.write(chunk)
                 fd.close()
                         
-                print "Downloaded Model!"
-                text = open('../dist/assets/' + os.path.basename(filename) + '.txt', 'w') #File is title, author, date
+                print "Downloaded Model " + str(loopInt) + "!"
+                text = open('../dist/assets/' + str(loopInt) + '.txt', 'w') #File is title, author, date
                 text.write(title[0] + '\n')
                 text.write(author[0] + '\n')
                 text.write(date[0])
@@ -75,7 +91,7 @@ def AssetScrape():
 #                print "Downloaded zip!"
 #                zip_file = zipfile.Zipfile('../dist/assets/' + os.path.basename(i), 'r')
 #                zip_file.extract
-    
+    BlendtoObj()
     
     
 AssetScrape()
