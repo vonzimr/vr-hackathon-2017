@@ -18,10 +18,15 @@ def BlendtoObj():
     for Blendfile in os.listdir("../dist/assets/"):
         if Blendfile.endswith(".blend"):
             Blendout, Blendext = os.path.splitext(Blendfile)
-            BlendfilePath = "../dist/assets/" + Blendfile
-            BlendoutPath = "../dist/assets/" + Blendout + '.obj'
-            subprocess.check_output(['blender', '-b', BlendfilePath, '-P', 'BlendtoObj.py', '--', BlendoutPath], shell = True)
-            #os.system('blender ' + BlendfilePath + ' --background --python + BlendtoObj.py ' + BlendoutPath)
+            os.chdir('../dist/assets') 
+            full_path = os.path.abspath(os.getcwd())
+            BlendfilePath = full_path + Blendfile
+            BlendoutPath = full_path + "/" + Blendout + '.obj'
+                
+            os.chdir('../../src/')
+            subprocess.call(['blender', '--background', BlendfilePath, '-P',
+                'BlendtoObj.py', '--', BlendoutPath])
+            #os.system('blender ', BlendfilePath', --background --python + BlendtoObj.py ' + BlendoutPath)
             print "Converted " + str(count)
             count = count + 1
         
@@ -29,7 +34,7 @@ def BlendtoObj():
 def AssetScrape():
     #Loop through this 5 or so times?
     loopInt = 0
-    while loopInt <= 4:
+    while loopInt <= 8:
         pageNum = random.randint(0, 103)
         address = ""
         if pageNum == 0:
