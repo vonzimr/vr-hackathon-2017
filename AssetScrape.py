@@ -22,8 +22,9 @@ def BlendtoObj(Blendfile):
         BlendoutPath = full_path + "/" + Blendout + '.obj'
 
         os.chdir(root_dir + '/src/')
-        subprocess.call(['blender', '--background', BlendfilePath, '-P',
+        retval = subprocess.call(['blender', '--background', BlendfilePath, '-P',
             'BlendtoObj.py', '--', BlendoutPath])
+        return retval
         #os.system('blender ', BlendfilePath', --background --python + BlendtoObj.py ' + BlendoutPath)
 
 
@@ -90,15 +91,16 @@ def AssetScrape():
                 fd.close()
                 
                 print  blend_file
-                BlendtoObj(blend_file)
-                print "Downloaded Model " + str(loopInt) + "!"
-                text = open(root_dir + '/dist/assets/' + str(loopInt) + '.txt', 'w') #File is title, author, date
-                text.write(unicode(title[0], "utf-8") + '\n')
-                text.write(unicode(author[0], "utf-8") + '\n')
-                text.write(unicode(date[0], "utf-8"))
-                text.close()
-                loopInt = loopInt + 1
-                break
+                retval = BlendtoObj(blend_file)
+                if retval == 0:
+                    print "Downloaded Model " + str(loopInt) + "!"
+                    text = open(root_dir + '/dist/assets/' + str(loopInt) + '.txt', 'w') #File is title, author, date
+                    text.write(unicode(title[0], "utf-8") + '\n')
+                    text.write(unicode(author[0], "utf-8") + '\n')
+                    text.write(unicode(date[0], "utf-8"))
+                    text.close()
+                    loopInt = loopInt + 1
+                    break
 #            elif file_ext == ".zip":
 #                modelResponse = requests.get(i, stream=True)
 #                with open('../dist/assets/' + os.path.basename(i), 'wb') as fd:
