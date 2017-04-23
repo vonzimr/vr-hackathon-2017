@@ -1,0 +1,7 @@
+{% extends "scene-common.njk" %}
+
+{% block observer %}
+    <a-camera position="0 2 -10" socket-send-position="event:player-pos">
+    <a-cursor></a-cursor>
+</a-camera>
+{% endblock %}
