@@ -12,7 +12,7 @@ import sys
 import requests
 from lxml import html
 import subprocess
-root_dir = "/home/robert/git/vr-hackathon-2017"
+root_dir = "."
 def BlendtoObj(Blendfile):
     if Blendfile.endswith(".blend"):
         Blendout, Blendext = os.path.splitext(Blendfile)
