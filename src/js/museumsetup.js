@@ -4,7 +4,7 @@ AFRAME.registerComponent('museumsetup', {
     var cylinder_z = -6
     scene = document.querySelector('a-scene');
 
-    function addArt(node) {
+    function addArt(node, int) {
       cylinderEntity = document.createElement('a-cylinder');
       cylinderEntity.setAttribute('position', {x: 1, y: 0, z: cylinder_z});
       cylinderEntity.setAttribute('color', 'red');
@@ -15,12 +15,20 @@ AFRAME.registerComponent('museumsetup', {
       artEntity = document.createElement('a-entity');
       artEntity.setAttribute('position', {x: 1, y: 1.5, z: cylinder_z});
       artEntity.setAttribute('obj-model', 'obj', '#' + node.id);
+      //artEntity.setAttribute('obj-model', 'mtl', '#' + node.id.replace('obj', 'mtl'));
+      artEntity.setAttribute('material', 'color', '#da8005');
+      artEntity.setAttribute('material', 'metalness', '0.5');
       scene.appendChild(artEntity);
       cylinder_z -= 3;
     }
 
     document.querySelector('a-assets');
-    a = document.querySelectorAll('a-asset-item');//placeholder tag
-    a.forEach(function(x) {addArt(x);});
+    a = document.querySelectorAll('a-asset-item');
+    a.forEach(function(x, y) {if ((y % 2) === 1){
+      return;
+    }
+    addArt(x);
+  });
   }
+
 });
