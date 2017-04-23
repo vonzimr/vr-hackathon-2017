@@ -31,12 +31,13 @@ def AssetScrape():
     #Loop through this 5 or so times?
     argv = sys.argv
     loopInt = 0
-    if argv == 1:
+    if argv[1] == 1:
         loopInt = 1
-    elif argv == 2:
+    elif argv[1] == 2:
         loopInt = 2
     else:
-        loopInt = (loopInt - 1) * 4
+        loopInt = 1
+    loopInt = (loopInt - 1) * 4
     while loopInt < (4 * loopInt):
         pageNum = random.randint(0, 103)
         address = ""
