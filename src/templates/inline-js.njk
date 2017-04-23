@@ -1,27 +1,31 @@
 <script>
 
-var cylinder_z = 0 ;
+//var cylinder_z = 0 ;
 scene = document.querySelector('a-scene');
+var colorarray = ['#41EA41', '#44EEE6', '#F2EF44', '#C844F2']
+var posarray = ['30 1.5 30', '-30 1.5 30', '30 1.5 -30', '-30 1.5 -30']
+var cylinderarray = ['30 0 30', '-30 0 30', '30 0 -30', '-30 0 -30']
 
-function addArt(node) {
+function addArt(node, num) {
     cylinderEntity = document.createElement('a-cylinder');
-    cylinderEntity.setAttribute('position', {x: 1, y: 0, z: cylinder_z});
+    cylinderEntity.setAttribute('position', cylinderarray[num]);
     cylinderEntity.setAttribute('color', 'red');
     cylinderEntity.setAttribute('height', 2.5);
     cylinderEntity.setAttribute('radius', 0.25);
     cylinderEntity.setAttribute('segmentsRadial', 8);//not working for some reason?
     scene.appendChild(cylinderEntity);
     artEntity = document.createElement('a-entity');
-    artEntity.setAttribute('position', {x: 1, y: 1.5, z: cylinder_z});
+    artEntity.setAttribute('position', posarray[num]);
     artEntity.setAttribute('obj-model', 'obj', '#' + node.id);
     //artEntity.setAttribute('obj-model', 'mtl', '#' + node.id.replace('obj', 'mtl'));
-    artEntity.setAttribute('material', 'color', '#da8005');
-    artEntity.setAttribute('material', 'metalness', '0.5');
+    //artEntity.setAttribute('material', 'color', '#da8005');
+    //artEntity.setAttribute('material', 'metalness', '0.5');
+    artEntity.setAttribute('material', 'color', colorarray[num]);
     scene.appendChild(artEntity);
-    cylinder_z -= 3;
+    //cylinder_z -= 3;
 }
 
 
 a = document.querySelectorAll('a-asset-item.downloaded');
-a.forEach(function(x) {addArt(x);});
+a.forEach(function(x, y) {addArt(x, y);});
 </script>
