@@ -34,6 +34,32 @@ AFRAME.registerComponent('follow', {
   }
 });
 
+
+AFRAME.registerComponent('check-distance', {
+  schema: {
+    target: {type: 'selector'},
+    dist: {default: 1},
+  },
+  init: function () {
+    this.directionVec3 = new THREE.Vector3();
+  },
+  tick: function (time, timeDelta) {
+    var directionVec3 = this.directionVec3;
+    var targetPosition = this.data.target.object3D.position;
+    var currentPosition = this.el.object3D.position;
+    directionVec3.copy(targetPosition).sub(currentPosition);
+    var distance = directionVec3.length();
+    if (distance < 5) {
+        socket.emit('switch room', null);
+        this.data.target.setAttribute('position', {
+            x: 0,
+            y: 2,
+            z: -10});
+    }
+
+  }
+});
+
 AFRAME.registerComponent('do-something-on-head-movement', {
   init: function () {
     var scene = this.el;

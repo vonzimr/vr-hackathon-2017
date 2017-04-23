@@ -27,29 +27,22 @@ app.get('/curator', function(req, res){
 app.get('/client', function(req, res){
     res.render(path.normalize(__dirname + "/src/templates/scene-client.njk"));
 });
-
+var cur_dl = 0;
 function get_new_objects(){
-    var new_models = exec('python2 ./AssetScrape.py', function(error, stdout, stderr){
+    var new_models = exec('python2 ./AssetScrape.py ' + (cur_dl % 2), 
+                          function(error, stdout, stderr){
         if (error) {
             console.error(`exec error: ${error}`);
             return;
         }
         console.log(`stdout: ${stdout}`);
         console.log(`stderr: ${stderr}`);
+        cur_dl += 1;
 
-        var obj = [];
-        fs.readdir(__dirname + "/dist/assets", function(err, assets){
-            assets.forEach(function(asset){
-                var ext = asset.split('.')[1];
-                if(ext == 'obj'){
-                    console.log(asset);
-                    obj.push(asset);
-                }
-            });
-        });
     });
 
 }
+
 
 io.on('connection', function(socket){
   var client_id = socket.id;
@@ -60,6 +53,12 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
+  });
+
+  socket.on('switch room', function(){
+
+    console.log('room switch!');
+    get_new_objects();
   });
 
   socket.on('box click', function(x){
